@@ -3,7 +3,7 @@ torchvision==0.1.9
 matplotlib==2.1.0
 opencv_python==3.3.0.10
 tensorflow==1.3.0
-torch==0.4.0
+torch==0.4.1 -f https://download.pytorch.org/whl/cpu/stable
 scipy==0.19.1
 numpy==1.13.3
 Pillow==4.3.0
