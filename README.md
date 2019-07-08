@@ -1,3 +1,10 @@
+# Fork specific instructions
+1. `conda create -n nyusziful_environment python=3.5`
+2. `pip install -r requirements.txt`
+3. `python mkSeqMNIST.py --N 8 --M 10000`
+4. `python mkSeqMNIST.py --N 8 --M 1000`
+5. `python main.py --epoch 10 --lr 0.005 --log-interval 1 --id nyusziful_modellje --batch-size 32 --train-len 8 --test-len 8`
+
 # MNIST Digit Sequence Recognition
 The data consists of sequences of digits from the MNIST dataset padded vertically with random pixels then randomly shifted vertically within a given range. The goal is to correctly recognize the sequence.
 
