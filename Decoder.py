@@ -171,8 +171,8 @@ class Decoder():
             D[:, 0] = np.arange(n + 1)
             D[0, :] = np.arange(m + 1)
 
-            for i in xrange(1, n + 1):
-                for j in xrange(1, m + 1):
+            for i in range(1, n + 1):
+                for j in range(1, m + 1):
                     if ref[i - 1] == hyp[j - 1]:
                         D[i, j] = D[i - 1, j - 1]
                     else:

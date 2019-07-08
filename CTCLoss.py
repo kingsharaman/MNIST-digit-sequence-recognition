@@ -63,14 +63,14 @@ class CTCLoss(torch.autograd.Function):
             alphas[:, 0] = alphas[:, 0] / c
             ll_forward = np.log(c) # log liklihood of forward
 
-            for t in xrange(1, T):
+            for t in range(1, T):
 
                 # in most cases, start = 0, end = L
                 start = max(0, L - 2 * (T - t))
                 end = min(2 * t + 2, L)
 
-                for s in xrange(start, L): # iterate at each position at l'
-                    l = (s - 1) / 2 # position in original target label
+                for s in range(start, L): # iterate at each position at l'
+                    l = (s - 1) // 2 # position in original target label
 
                     if s % 2 == 0:  # if s(u) is even, it must be blank
                         if s == 0:
@@ -133,12 +133,12 @@ class CTCLoss(torch.autograd.Function):
             betas[:, -1] = betas[:, -1] / c
             ll_backward = np.log(c)
 
-            for t in xrange(T - 2, -1, -1):
+            for t in range(T - 2, -1, -1):
                 start = max(0, L - 2 * (T - t))
                 end = min(2 * t + 2, L)
 
-                for s in xrange(end - 1, -1, -1):
-                    l = (s - 1) / 2
+                for s in range(end - 1, -1, -1):
+                    l = (s - 1) // 2
 
                     if s % 2 == 0:  # blank
                         if s == L - 1:
@@ -160,13 +160,13 @@ class CTCLoss(torch.autograd.Function):
             # compute gradient of the loss function with respect to unnormalized input parameters
             grad = np.zeros(probs.shape)
             ab = alphas * betas
-            for s in xrange(L): #
+            for s in range(L): #
                 if s % 2 == 0:  # blank
                     grad[self.blank, :] += ab[s, :]
                     ab[s, :] = ab[s, :] / probs[self.blank, :]
                 else:
-                    grad[seq[(s - 1) / 2], :] += ab[s, :]
-                    ab[s, :] = ab[s, :] / (probs[seq[(s - 1) / 2], :])
+                    grad[seq[(s - 1) // 2], :] += ab[s, :]
+                    ab[s, :] = ab[s, :] / (probs[seq[(s - 1) // 2], :])
 
             absum = np.sum(ab, axis=0)
 
