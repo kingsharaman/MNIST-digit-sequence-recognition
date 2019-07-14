@@ -6,3 +6,4 @@ images/*
 handwrittenDigitSequenceRec/*
 *.pyc
 venv/*
+.ipynb_checkpoints/

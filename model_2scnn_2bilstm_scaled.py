@@ -119,7 +119,7 @@ class Net(nn.Module):
         # reshape
         out = out.permute(0, 3, 2, 1) # D(out) = (batch_size, W, H, cnn_output_chanel)
         out.contiguous()
-        out = out.view(batch_size, -1, self.lstm_input_size) # D(out) = (batch_size, seq_len, lstm_input_size) where seq_len = W, lstm_input_size = H * cnn_output_chanel
+        out = out.contiguous().view(batch_size, -1, self.lstm_input_size) # D(out) = (batch_size, seq_len, lstm_input_size) where seq_len = W, lstm_input_size = H * cnn_output_chanel
 
         # print "before LSTM: ", out.size()
         # LSTM
@@ -127,7 +127,7 @@ class Net(nn.Module):
 
         # reshape
         out.contiguous()
-        out = out.view(-1, self.fc_input_size) # D(out) = (batch_size * seq_len, hidden_size)
+        out = out.contiguous().view(-1, self.fc_input_size) # D(out) = (batch_size * seq_len, hidden_size)
 
         # fc layer
         out = self.fc(out) # D(out) = (batch_size * seq_len, classes)

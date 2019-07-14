@@ -9,7 +9,7 @@ from torchvision import datasets, transforms
 from torch.autograd import Variable
 import torch.utils.data as data_utils
 import numpy as np
-from CTCLoss import *
+from CTCLossCPU import *
 from Decoder import *
 import os
 import shutil
